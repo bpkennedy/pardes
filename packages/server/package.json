@@ -1,0 +1,13 @@
+{
+    "name": "@pardes/simulation",
+    "version": "0.0.1",
+    "private": true,
+    "main": "./src/index.ts",
+    "dependencies": {
+        "@pardes/common": "0.0.1",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "express": "^4.17.3",
+        "path": "^0.12.7"
+    }
+}

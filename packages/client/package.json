@@ -1,0 +1,16 @@
+{
+  "name": "@pardes/client",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@pardes/common": "0.0.1",
+    "core-js": "^3.8.3",
+    "vue": "^3.2.13"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

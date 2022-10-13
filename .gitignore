@@ -1,0 +1,17 @@
+# dependencies
+**/node_modules
+
+# build
+**/dist
+**/public/script.css**
+**/public/script.js**
+**/public/assets
+LICENSE
+
+# misc
+.DS_Store
+.env.*
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

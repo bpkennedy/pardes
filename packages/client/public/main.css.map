@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["/Users/kennedyb/Projects/pardes/packages/client/src/App.vue"],
+  "sourcesContent": ["<template>\n  <HelloWorld/>\n</template>\n\n<script lang=\"ts\">\nimport { defineComponent } from 'vue';\nimport HelloWorld from './components/HelloWorld.vue';\n\nexport default defineComponent({\n  name: 'App',\n  components: {\n    HelloWorld\n  }\n});\n</script>\n\n<style>\nbody {\n  position: relative;\n  padding: 0;\n  margin: 0;\n}\n</style>\n"],
+  "mappings": ";AAiBA;AACE;AACA;AACA;;",
+  "names": []
+}
