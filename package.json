@@ -3,7 +3,16 @@
     "version": "0.0.1",
     "private": true,
     "description": "a rabbinical study tool",
-    "keywords": ["pardes", "pashat", "remez", "drash", "sod", "torah", "tanahk", "bible"],
+    "keywords": [
+        "pardes",
+        "pashat",
+        "remez",
+        "drash",
+        "sod",
+        "torah",
+        "tanahk",
+        "bible"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/bpkennedy/pardes"
