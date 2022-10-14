@@ -13,8 +13,6 @@ if (!BUILD_MODE || !['production', 'development'].includes(BUILD_MODE)) {
  * A builder function for the client package.
  */
 export async function buildClient() {
-    console.log('[Build] Building client...');
-
     await build({
       entryPoints: ['packages/client/src/main.js'],
       bundle: true,
@@ -50,8 +48,6 @@ export async function buildClient() {
  * A builder function for the server package.
  */
 export async function buildServer() {
-    console.log('[Build] Building server...');
-
     await build({
         entryPoints: ['packages/server/src/index.ts'],
         outfile: 'packages/server/dist/index.js',
@@ -81,8 +77,6 @@ export async function buildServer() {
  * A builder function for the common package.
  */
  export async function buildCommon() {
-  console.log('[Build] Building common...');
-
   await build({
       entryPoints: ['packages/common/src/index.ts'],
       outfile: 'packages/common/dist/index.js',
@@ -103,7 +97,7 @@ export async function buildServer() {
                 },
   });
 
-  console.log('[Build] Server built...');
+  console.log('[Build] Common built...');
 }
 
 /**

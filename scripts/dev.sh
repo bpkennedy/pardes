@@ -2,4 +2,4 @@
 
 yarn concurrently --kill-others-on-fail \
     "yarn build" \
-    "yarn nodemon ./packages/server/dist/index.js" \
+    "yarn nodemon --watch 'packages/**' --ext 'ts,vue,json' --ignore 'packages/**/node_modules,packages/**/dist' --exec 'yarn build && yarn serve'" \
