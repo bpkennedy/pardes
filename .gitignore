@@ -3,9 +3,10 @@
 
 # build
 **/dist
-**/public/script.css**
-**/public/script.js**
-**/public/assets
+./packages/client/public/main.css
+./packages/client/public/main.css.map
+./packages/client/public/main.js
+./packages/client/public/main.js.map
 LICENSE
 
 # misc
