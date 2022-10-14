@@ -4,6 +4,7 @@ import express from 'express';
 import { join } from 'path';
 import { Constants, Log } from '@pardes/common';
 import { createServer } from 'http';
+import * as bible from './net.json';
 
 const PORT = Number(process.env.PORT || Constants.PORT);
 const PUBLIC_DIR = join(__dirname, Constants.PUBLIC_PATH_TO_CLIENT);
@@ -16,8 +17,30 @@ app.use(express.json());
 app.use(compression());
 app.use(express.static(PUBLIC_DIR));
 
-app.get('*', (req: any, res: any) => {
+Object.keys(bible).forEach(function(book) {
+  app.get(`/${book}`, (req: any, res: any) => {
+    return bible[book] !== undefined ? res.send(bible[book]) : res.status(404).send(`'${book}' does not exist.`)
+  })
+
+  Object.keys(bible[book]).forEach(function(chapter) {
+    app.get(`/${book}/${chapter}`, (req: any, res: any) => {
+      return bible[book][chapter] !== undefined ? res.send(bible[book][chapter]) : res.status(404).send(`'${book} ${chapter}' does not exist.`)
+    })
+
+    Object.keys(bible[book][chapter]).forEach(function(verse) {
+      app.get(`/${book}/${chapter}/${verse}`, (req: any, res: any) => {
+        return bible[book][chapter][verse] !== undefined ? res.send(bible[book][chapter][verse]) : res.status(404).send(`'${book} ${chapter}:${verse}' does not exist.`)
+      })
+    })
+  })
+})
+
+app.get('/', (req: any, res: any) => {
   res.sendFile(join(PUBLIC_DIR, 'index.html'));
+});
+
+app.get('*', (req: any, res: any) => {
+  res.status(404).send('Route does not exist.');
 });
 
 server.listen(PORT, async () => {
