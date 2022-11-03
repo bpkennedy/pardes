@@ -2,10 +2,12 @@ import { build } from 'esbuild';
 import pluginVue from 'esbuild-plugin-vue-next';
 import svgrPlugin from 'esbuild-plugin-svgr';
 
+const PRODUCTION = 'production'
+const DEVELOPMENT = 'development'
 type Environment = 'production' | 'development';
 
-const BUILD_MODE = (process.env.BUILD_MODE as Environment) || 'development';
-if (!BUILD_MODE || !['production', 'development'].includes(BUILD_MODE)) {
+const BUILD_MODE = (process.env.BUILD_MODE as Environment) || DEVELOPMENT;
+if (!BUILD_MODE || ![PRODUCTION, DEVELOPMENT].includes(BUILD_MODE)) {
     throw new Error(`[Build] Cannot build with provided environment "${BUILD_MODE}".`);
 }
 
@@ -26,13 +28,15 @@ export async function buildClient() {
         '.ico': 'file',
       },
       plugins: [svgrPlugin(), pluginVue()],
-      minify: BUILD_MODE === 'production',
-      sourcemap: BUILD_MODE === 'development',
+      minify: BUILD_MODE === PRODUCTION,
+      sourcemap: BUILD_MODE === DEVELOPMENT,
       define: {
         'process.env.NODE_ENV': `"${process.env.BUILD_MODE}"`,
+        '__VUE_OPTIONS_API__': "true",
+        '__VUE_PROD_DEVTOOLS__': "true",
       },
       watch:
-            BUILD_MODE === 'production'
+            BUILD_MODE === PRODUCTION
                 ? false
                 : {
                       onRebuild: (error, result) => {
@@ -58,10 +62,10 @@ export async function buildServer() {
         platform: 'node',
         target: 'node16.15.1',
         bundle: true,
-        minify: BUILD_MODE === 'production',
-        sourcemap: BUILD_MODE === 'development',
+        minify: BUILD_MODE === PRODUCTION,
+        sourcemap: BUILD_MODE === DEVELOPMENT,
         watch:
-            BUILD_MODE === 'production'
+            BUILD_MODE === PRODUCTION
                 ? false
                 : {
                       onRebuild: (error, result) => {
@@ -85,10 +89,10 @@ export async function buildServer() {
       },
       external: ['@lastolivegames/becsy', 'chalk', 'raf'],
       bundle: true,
-      minify: BUILD_MODE === 'production',
-      sourcemap: BUILD_MODE === 'development',
+      minify: BUILD_MODE === PRODUCTION,
+      sourcemap: BUILD_MODE === DEVELOPMENT,
       watch:
-          BUILD_MODE === 'production'
+          BUILD_MODE === PRODUCTION
               ? false
               : {
                     onRebuild: (error, result) => {
