@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "@pardes/common": "0.0.1",
+    "axios": "^1.1.3",
     "core-js": "^3.8.3",
+    "pinia": "^2.0.23",
     "vue": "^3.2.13",
+    "vue-router": "4",
     "vuetify": "3.0.0-beta.13"
   },
   "browserslist": [

@@ -1,89 +1,30 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar
-      app
-      color="white"
-      density="compact"
-      flat
+  <v-app
+    id="inspire"
+  >
+    <top-bar/>
+    <v-main
+      class="grey lighten-3"
     >
-      <v-avatar
-        color="grey darken-2 shrink"
-        size="32"
-      ></v-avatar>
-
-      <v-tabs
-        centered
-        class="ml-n9 flex-grow-1"
-        color="grey darken-1"
-      >
-        <v-tab
-          v-for="link in links"
-          :key="link"
-        >
-          {{ link }}
-        </v-tab>
-      </v-tabs>
-
-      <v-avatar
-        class="hidden-sm-and-down"
-        color="grey darken-1 shrink"
-        size="32"
-      ></v-avatar>
-    </v-app-bar>
-
-    <v-main class="grey lighten-3">
-      <v-container>
-        <v-row>
-          <v-col
-            cols="12"
-            sm="2"
-          >
-            <v-sheet
-              rounded="lg"
-              min-height="268"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="8"
-          >
-            <v-sheet
-              min-height="70vh"
-              rounded="lg"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="2"
-          >
-            <v-sheet
-              rounded="lg"
-              min-height="268"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
+  import { useBooksStore, LOAD_BIBLE_BOOKS_ACTION } from './stores/books'
+  import TopBar from './components/TopBar.vue'
+
   export default {
-    data: () => ({
-      links: [
-        'Dashboard',
-        'Messages',
-        'Profile',
-        'Updates',
-      ],
-    }),
+    components: {
+      TopBar,
+    },
+    setup() {
+      const booksStore = useBooksStore()
+      return { booksStore }
+    },
+    beforeCreate() {
+      this.booksStore[LOAD_BIBLE_BOOKS_ACTION]()
+    }
   }
 </script>

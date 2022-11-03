@@ -1,16 +1,16 @@
 <template>
-  <div id="game"></div>
+  <div class="hello-world">Hello {{msg}}</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'HelloWorld',
+export default {
   props: {
-    msg: String,
-  },
-});
+    msg: {
+      type: String,
+      default: 'World!',
+    }
+  }
+}
 </script>
 
 <style scoped>
