@@ -16,5 +16,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@mdi/font": "^7.0.96",
+    "autoprefixer": "^10.4.13",
+    "esbuild-sass-plugin": "^2.4.0",
+    "postcss": "^8.4.18"
+  }
 }

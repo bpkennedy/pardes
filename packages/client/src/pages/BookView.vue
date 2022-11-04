@@ -23,7 +23,7 @@
           min-height="70vh"
           rounded="lg"
         >
-          <!--  -->
+          {{ booksStore.loadedBook }}
         </v-sheet>
       </v-col>
 
@@ -36,7 +36,7 @@
           rounded="lg"
           min-height="268"
         >
-
+          <!--  -->
         </v-sheet>
       </v-col>
     </v-row>
@@ -44,6 +44,22 @@
 </template>
 
 <script lang="ts">
+  import { useBooksStore, LOAD_BIBLE_SINGLE_BOOK_ACTION } from '../stores/books'
+
   export default {
+    setup() {
+      const booksStore = useBooksStore()
+
+      booksStore.$subscribe((mutation, state) => {
+        if (mutation.storeId === 'loadedBook') {
+            booksStore[LOAD_BIBLE_SINGLE_BOOK_ACTION]()
+        }
+      })
+
+      return { booksStore }
+    },
+    beforeCreate() {
+      this.booksStore[LOAD_BIBLE_SINGLE_BOOK_ACTION]()
+    }
   }
 </script>

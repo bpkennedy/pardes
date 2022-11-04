@@ -27,17 +27,18 @@ function getVerse(book: string, chapter: string, verse: string) {
 
 export function createBibleRoutes(app: any) {
   Object.keys(bible).forEach(function(book) {
-    app.get(`/${book}`, (req: any, res: any) => {
+    const urlSafeBook = encodeURIComponent(book)
+    app.get(`/${urlSafeBook}`, (req: any, res: any) => {
       res.send(getBookChapters(book))
     })
 
     Object.keys(bible[book]).forEach(function(chapter) {
-      app.get(`/${book}/${chapter}`, (req: any, res: any) => {
+      app.get(`/${urlSafeBook}/${chapter}`, (req: any, res: any) => {
         res.send(getChapterVerses(book, chapter))
       })
 
       Object.keys(bible[book][chapter]).forEach(function(verse) {
-        app.get(`/${book}/${chapter}/${verse}`, (req: any, res: any) => {
+        app.get(`/${urlSafeBook}/${chapter}/${verse}`, (req: any, res: any) => {
           res.send(getVerse(book, chapter, verse))
         })
       })

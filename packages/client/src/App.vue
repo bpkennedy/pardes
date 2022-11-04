@@ -2,22 +2,27 @@
   <v-app
     id="inspire"
   >
-    <top-bar/>
+    <nav-drawer/>
+
     <v-main
       class="grey lighten-3"
     >
       <router-view/>
     </v-main>
+
+    <bottom-nav/>
   </v-app>
 </template>
 
 <script lang="ts">
   import { useBooksStore, LOAD_BIBLE_BOOKS_ACTION } from './stores/books'
-  import TopBar from './components/TopBar.vue'
+  import BottomNav from './components/BottomNav.vue'
+  import NavDrawer from './components/NavDrawer.vue'
 
   export default {
     components: {
-      TopBar,
+      BottomNav,
+      NavDrawer,
     },
     setup() {
       const booksStore = useBooksStore()

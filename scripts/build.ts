@@ -1,6 +1,9 @@
 import { build } from 'esbuild';
 import pluginVue from 'esbuild-plugin-vue-next';
 import svgrPlugin from 'esbuild-plugin-svgr';
+import { sassPlugin } from "esbuild-sass-plugin";
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
 
 const PRODUCTION = 'production'
 const DEVELOPMENT = 'development'
@@ -26,8 +29,21 @@ export async function buildClient() {
         '.ogg': 'file',
         '.svg': 'file',
         '.ico': 'file',
+        '.woff': 'file',
+        '.woff2': 'file',
+        '.ttf': 'file',
+        '.eot': 'file',
       },
-      plugins: [svgrPlugin(), pluginVue()],
+      plugins: [
+        svgrPlugin(),
+        pluginVue(),
+        sassPlugin({
+            async transform(source) {
+                const { css } = await postcss([autoprefixer]).process(source);
+                return css;
+            },
+        }),
+      ],
       minify: BUILD_MODE === PRODUCTION,
       sourcemap: BUILD_MODE === DEVELOPMENT,
       define: {
